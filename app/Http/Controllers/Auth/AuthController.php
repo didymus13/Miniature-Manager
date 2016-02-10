@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -68,5 +70,31 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    public function handleProviderCallback($provider)
+    {
+        $user = Socialite::driver($provider)->user();
+
+        // If user doesn't exist, create him.
+        $dbUser = User::where([['provider', $provider], ['provider_id', $user->getId()]])->first();
+        if (!$dbUser) {
+            $dbUser = User::create([
+                'name' => $user->getName(),
+                'email' => $user->getEmail(),
+                'password' => bcrypt(microtime()),
+                'provider' => $provider,
+                'provider_id' => $user->getId(),
+                'photo' => $user->getAvatar()
+            ]);
+        }
+        Auth::login($dbUser);
+
+        return redirect()->intended('/profile');
     }
 }
