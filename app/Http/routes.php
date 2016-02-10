@@ -27,5 +27,12 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::post('auth/logout', ['as' => 'logout', function() {
+        Auth::logout();
+        return redirect()->intended();
+    }]);
+    Route::get('login', 'LoginController@login');
+    Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
+    Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+    Route::get('profile', ['middleware' => 'auth', 'uses' => 'ProfileController@show']);
 });
