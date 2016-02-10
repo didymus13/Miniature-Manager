@@ -13,10 +13,12 @@ class AddSocialFieldsToUser extends Migration
     public function up()
     {
         Schema::table('users', function($table) {
+            $table->string('email')->nullable()->change();
+            $table->dropIndex('users_email_unique');
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();
             $table->string('photo')->nullable();
-            $table->unique(['provider', 'provider_id']);
+            $table->unique(['email', 'provider', 'provider_id']);
         });
     }
 
@@ -29,6 +31,7 @@ class AddSocialFieldsToUser extends Migration
     {
         Schema::table('users', function($table) {
             $table->dropColumn(['provider', 'provider_id', 'photo']);
+            $table->string('email')->unique()->change();
         });
     }
 }
