@@ -21,6 +21,13 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-
     Route::get('/home', 'HomeController@index');
+
+    // Authenticated Users Only
+    Route::group(['middleware' => 'auth'], function () {
+        Route::resource('/collections', 'CollectionController', ['except' => ['index', 'show']]);
+    });
+
+
+    Route::resource('/collections', 'CollectionController', ['only' => ['index', 'show']]);
 });

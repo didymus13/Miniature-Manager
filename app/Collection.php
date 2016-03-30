@@ -15,9 +15,16 @@ class Collection extends Model implements SluggableInterface
         'save_to' => 'slug'
     ];
 
+    protected $fillable = ['label', 'description'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function miniatures()
+    {
+        return $this->hasMany(Miniature::class);
     }
 
     public function images()
