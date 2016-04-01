@@ -15,6 +15,8 @@ class Miniature extends Model implements SluggableInterface
         'save_to' => 'slug'
     ];
 
+    protected $fillable = ['label', 'progress'];
+
     public function collection()
     {
         return $this->belongsTo(Collection::class);

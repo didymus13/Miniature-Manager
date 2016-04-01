@@ -26,6 +26,7 @@ Route::group(['middleware' => 'web'], function () {
     // Authenticated Users Only
     Route::group(['middleware' => 'auth'], function () {
         Route::resource('/collections', 'CollectionController', ['except' => ['index', 'show']]);
+        Route::resource('/miniatures', 'MiniatureController', ['only' => ['update', 'store', 'destroy']]);
     });
 
 
