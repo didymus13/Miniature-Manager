@@ -2,23 +2,66 @@
 
 <?php $token = csrf_token() ?>
 
+@section('head')
+    <title>{{ $collection->label }}</title>
+    <meta name="blurb" content="{{ $collection->description }}"/>
+    <meta name="keywords" content="{{ implode(',', $collection->tagNames()) }}">
+
+    <link rel="canonical" href="{{ route('collections.show', $collection->slug, true) }}"/>
+    @can('edit', $collection)
+    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"
+          rel="stylesheet"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css">
+    @endcan
+@endsection
+
 @section('content')
+    @can('delete', $collection)
+    {!! Form::open(['route' => ['collections.destroy', $collection->slug], 'method' => 'DELETE']) !!}
+    <div class="pull-right">
+        {!! Form::submit('Delete Collection', ['class' => 'btn btn-danger confirm']) !!}
+    </div>
+    {!! Form::close() !!}
+    @endcan
+    <article>
     <div class="page-heading">
-        <h1>{{ $collection->label }}</h1>
+        <h1 data-type="text" data-pk="{{ $collection->slug }}" data-name="label"
+            data-url="{{ route('collections.update', $collection->slug) }}" data-title="Name" class="editable">
+            {{ $collection->label }}
+        </h1>
     </div>
 
     <ul class="list-inline">
-        @can('edit', $collection)
-        <li><a href="{{ route('collections.edit', $collection->slug) }}" class="btn btn-primary">Edit</a></li>
-        @endcan
-        @can('delete', $collection)
-        {!! Form::open(['route' => ['collections.destroy', $collection->slug], 'method' => 'DELETE']) !!}
-        <li>{!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}</li>
-        {!! Form::close() !!}
-        @endcan
+        <li><span class="fa fa-user"></span></li>
+        <li>{{ $collection->user->name }}</li>
+        <li><span class="fa fa-calendar"></span> {{ $collection->updated_at->diffForHumans() }}</li>
+
+        @cannot('edit', $collection)
+        <li><span class="fa fa-tags"></span></li>
+        @foreach($collection->tags as $tag)
+            <li><a href="{{ route('collections.index', ['tags' => $tag->slug]) }}">{{ $tag->name }}</a></li>
+        @endforeach
+        @endcannot
     </ul>
 
-    <p>{{ $collection->description }}</p>
+        @can('edit', $collection)
+        {!! Form::label('tags', 'Tags') !!}
+        <select multiple="multiple" class="form-control select" name="tags"
+                data-url="{{ route('collections.update', $collection->slug) }}">
+            @foreach(\App\Collection::existingTags() as $tag)
+                <option value="{{ $tag->name }}"
+                        @if(in_array($tag->name, $collection->tagNames())) selected="selected" @endif
+                >
+                    {{ $tag->name }}
+                </option>
+            @endforeach
+        </select>
+        @endcan
+
+        <p data-type="textarea" data-pk="{{ $collection->slug }}" data-name="description"
+           data-url="{{ route('collections.update', $collection->slug) }}" data-title="Name" class="editable">
+            {{ $collection->description }}
+        </p>
 
     <table class="table">
         <caption>Miniatures</caption>
@@ -62,6 +105,7 @@
         @endforeach
         </tbody>
     </table>
+    </article>
 
     @can('edit', $collection)
     {!! Form::open(['route' => ['miniatures.store'], 'method' => 'POST', 'class' => 'form-inline']) !!}
@@ -81,8 +125,14 @@
 
 @section('endBody')
     @can('edit', $collection)
+    <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/i18n/en.js"></script>
     <script>
         $(function () {
+            $('.select').select2({
+                tags: true
+            });
             $.fn.editable.defaults.ajaxOptions = {method: 'PATCH'};
             $(".editable").editable({
                 params: function (params) {
@@ -96,15 +146,15 @@
                     var parent = $(this).parent();
                     if (parent.hasClass('progress-bar')) {
                         parent.width(newValue + '%');
+                        }
                     }
-                }
             });
 
             $('tbody').delegate('.confirm.destroy', 'click', function (event) {
                 if (!confirm('Are you sure?')) {
                     return;
                 }
-                var row = $(this).closest('tr');
+                var deleteThis = $(this).closest('tr');
                 $.ajax({
                     url: $(this).data('url'),
                     type: 'DELETE',
@@ -112,13 +162,21 @@
                     statusCode: {
                         204: function (response) {
                             console.log(row);
-                            row.fadeOut(750, function () {
+                            deleteThis.fadeOut(750, function () {
                                 $(this).remove()
                             });
                         }
                     }
                 })
-            })
+            });
+            $('.select').on('change', function (event) {
+                console.log($(this).val());
+                $.ajax({
+                    url: $(this).data('url'),
+                    type: 'PUT',
+                    data: {_token: '{{ $token }}', tags: $(this).val()}
+                });
+            });
         });
     </script>
     @endcan
