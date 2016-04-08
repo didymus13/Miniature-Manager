@@ -22,8 +22,8 @@ class Miniature extends Model implements SluggableInterface
         return $this->belongsTo(Collection::class);
     }
 
-    public function images()
+    public function photos()
     {
-        return $this->morphToMany(Photo::class, 'imageable');
+        return $this->morphMany(Photo::class, 'imageable');
     }
 }

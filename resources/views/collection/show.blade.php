@@ -12,6 +12,8 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"
           rel="stylesheet"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick-theme.css"/>
     @endcan
 @endsection
 
@@ -30,6 +32,14 @@
             {{ $collection->label }}
         </h1>
     </div>
+
+    <ul id="photo-gallery">
+        @foreach($collection->miniatures as $miniature)
+            @foreach($miniature->photos as $photo)
+                <li><img data-lazy="{{ $photo->url }}" alt="{{ $photo->caption }}" /></li>
+            @endforeach
+        @endforeach
+    </ul>
 
     <ul class="list-inline">
         <li><span class="fa fa-user"></span></li>
@@ -130,10 +140,20 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/i18n/en.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"></script>
     <script>
         $(function () {
             $('.select').select2({
                 tags: true
+            });
+            $('#photo-gallery').slick({
+                lazyLoad: 'ondemand',
+                lazyLoadBuffer: 0,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                centerMode: true,
+                variableWidth: true,
+                dots: true
             });
             $.fn.editable.defaults.ajaxOptions = {method: 'PATCH'};
             $(".editable").editable({
