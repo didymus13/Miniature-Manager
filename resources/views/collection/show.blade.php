@@ -37,10 +37,12 @@
         <li><span class="fa fa-calendar"></span> {{ $collection->updated_at->diffForHumans() }}</li>
 
         @cannot('edit', $collection)
-        <li><span class="fa fa-tags"></span></li>
-        @foreach($collection->tags as $tag)
-            <li><a href="{{ route('collections.index', ['tags' => $tag->slug]) }}">{{ $tag->name }}</a></li>
-        @endforeach
+        @if($collection->tags)
+            <li><span class="fa fa-tags"></span></li>
+            @foreach($collection->tags as $tag)
+                <li><a href="{{ route('collections.index', ['tags' => $tag->slug]) }}">{{ $tag->name }}</a></li>
+            @endforeach
+        @endif
         @endcannot
     </ul>
 
