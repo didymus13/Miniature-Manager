@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Collection;
 use App\Http\Requests;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CollectionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('collection.index', ['collections' => Collection::paginate()]);
+        $tags = $request->get('tags');
+        $collections = $tags ? Collection::withAnyTag($tags)->paginate() : Collection::paginate();
+        return view('collection.index', ['collections' => $collections]);
     }
 
     public function show($slug)
@@ -29,6 +32,9 @@ class CollectionController extends Controller
     {
         $user = Auth::user();
         $collection = new Collection($request->all());
+        if ($request->get('tags')) {
+            $collection->retag($request->get('tags'));
+        }
         $user->collections()->save($collection);
         return redirect(route('collections.show', $collection->slug));
     }
@@ -40,12 +46,21 @@ class CollectionController extends Controller
         return view('collection.edit', ['collection' => $collection]);
     }
 
-    public function update(Requests\CollectionRequest $request, $slug)
+    public function update(Request $request, $slug)
     {
         $collection = Collection::findBySlugOrFail($slug);
         $this->authorize('edit', $collection);
         $collection->update($request->all());
-        return redirect(route('collections.show', $collection->slug));
+
+        if (isset($request->all()['tags']) && empty($request->get('tags'))) {
+            $collection->untag();
+        }
+        
+        if ($request->has('tags')) {
+            $collection->retag($request->get('tags'));
+        }
+        $collection->tags;
+        return $collection;
     }
 
     public function destroy($slug)

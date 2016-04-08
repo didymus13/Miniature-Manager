@@ -28,7 +28,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::resource('/collections', 'CollectionController', ['except' => ['index', 'show']]);
         Route::resource('/miniatures', 'MiniatureController', ['only' => ['update', 'store', 'destroy']]);
     });
-
-
+    
     Route::resource('/collections', 'CollectionController', ['only' => ['index', 'show']]);
 });

@@ -2,13 +2,14 @@
 
 namespace App;
 
+use Conner\Tagging\Taggable;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Collection extends Model implements SluggableInterface
 {
-    use SluggableTrait;
+    use SluggableTrait, Taggable;
 
     protected $sluggable = [
         'build_from' => 'label',

@@ -19,6 +19,26 @@ class CollectionCest
         $I->see($collection->updated_at->diffForHumans());
     }
 
+    public function tryToListCollectionsByTag(FunctionalTester $I)
+    {
+        $faker = \Faker\Factory::create();
+        $I->am('user');
+        $I->wantTo('get a list of collections by tag');
+
+        $user = factory(\App\User::class)->create();
+        $collection = factory(\App\Collection::class)->create(['user_id' => $user->id]);
+        $tag = $faker->word;
+
+        $I->amOnRoute('collections.index', ['tags' => $tag]);
+        $I->seeResponseCodeIs(200);
+        $I->dontSee($collection->label);
+
+        $collection->tag($tag);
+        $I->amOnRoute('collections.index', ['tags' => $tag]);
+        $I->seeResponseCodeIs(200);
+        $I->see($collection->label);
+    }
+
     public function tryToCreateACollection(FunctionalTester $I)
     {
         $I->am('anonymous user');
@@ -55,15 +75,5 @@ class CollectionCest
         $I->see($mini->label);
         $I->see($mini->progress);
         $I->see($mini->updated_at->diffForHumans());
-    }
-
-    public function tryToUpdateACollection(FunctionalTester $I)
-    {
-
-    }
-
-    public function tryToDeleteACollection(FunctionalTester $I)
-    {
-
     }
 }
