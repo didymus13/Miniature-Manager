@@ -86,6 +86,7 @@
         <tr>
             <th>Name</th>
             <th>Progress</th>
+            <th>Thumbnails</th>
             @can('edit', $collection)
             <th>Image Upload</th>
             @endcan
@@ -111,6 +112,11 @@
                             </span> %
                         </div>
                     </div>
+                </td>
+                <td>
+                    @foreach($mini->photos as $photo)
+                        <img src="/uploads/{{$photo->thumb_url}}" alt="{{ $photo->caption }}" class="img-thumbnail" style="width: 10%"/>
+                    @endforeach
                 </td>
                 @can('edit', $mini)
                 <td>
@@ -209,7 +215,7 @@
                     }
                 })
             });
-            
+
             $('.select').on('change', function (event) {
                 console.log($(this).val());
                 $.ajax({
