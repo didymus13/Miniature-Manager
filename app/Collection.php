@@ -18,6 +18,16 @@ class Collection extends Model implements SluggableInterface
 
     protected $fillable = ['label', 'description'];
 
+    public static function boot()
+    {
+        parent::boot();
+        Collection::deleting(function($collection) {
+            foreach($collection->miniatures() as $mini) {
+                $mini->delete();
+            }
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

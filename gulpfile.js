@@ -13,4 +13,6 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass('app.scss');
+
+    mix.copy('node_modules/dropzone/dist/min', 'public/vendor/dropzone')
 });
