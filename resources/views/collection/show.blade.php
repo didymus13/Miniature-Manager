@@ -87,6 +87,7 @@
     </div>
 
     <!-- Minitures list -->
+        <div class="table-responsive">
     <table class="table">
         <caption>Miniatures</caption>
         <thead>
@@ -121,9 +122,14 @@
                     </div>
                 </td>
                 <td>
+                    <div class="row">
                     @foreach($mini->photos as $photo)
-                        <img src="/uploads/{{$photo->thumb_url}}" alt="{{ $photo->caption }}" class="img-thumbnail" style="width: 10%"/>
+                        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <img src="/uploads/{{$photo->thumb_url}}" alt="{{ $photo->caption }}"
+                             class="img-responsive confirm destroy" data-url="{{ route('photos.destroy', $photo->id) }}"/>
+                        </div>
                     @endforeach
+                    </div>
                 </td>
                 @can('edit', $mini)
                 <td>
@@ -144,6 +150,7 @@
         @endforeach
         </tbody>
     </table>
+        </div>
     </article>
 
     @can('edit', $collection)

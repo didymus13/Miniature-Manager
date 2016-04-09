@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Collection;
 use App\Miniature;
+use App\Photo;
 use App\Policies\CollectionPolicy;
 use App\Policies\MiniaturePolicy;
+use App\Policies\PhotoPolicy;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Model' => 'App\Policies\ModelPolicy',
         Collection::class => CollectionPolicy::class,
         Miniature::class => MiniaturePolicy::class,
+        Photo::class => PhotoPolicy::class,
     ];
 
     /**
