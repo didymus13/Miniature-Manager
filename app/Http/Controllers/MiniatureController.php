@@ -67,17 +67,25 @@ class MiniatureController extends Controller
         $thumbnailImagePath = $targetPath . "-thumb.$ext";
 
         $disk = Storage::disk('public');
-        $disk->put(
-            $fullImagePath,
-            file_get_contents($file->getRealPath())
-        );
+
+        // Make Image
+        $image = Image::make($file->getRealPath());
+        // prevent possible upsizing
+        $image->resize(null, 1080, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })
+            ->resize(1080, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });;
+        $disk->put($fullImagePath, $image->stream());
 
         // Make Thumbnail
-        $thumbnail = Image::make($disk->get($fullImagePath));
-        $thumbnail->fit(180, 180, function ($constraint) {
+        $image->fit(180, 180, function ($constraint) {
             $constraint->upsize();
         });
-        $disk->put($thumbnailImagePath, $thumbnail->stream());
+        $disk->put($thumbnailImagePath, $image->stream());
 
         $photo->url = $fullImagePath;
         $photo->thumb_url = $thumbnailImagePath;
