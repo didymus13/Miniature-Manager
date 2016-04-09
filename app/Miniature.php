@@ -17,6 +17,16 @@ class Miniature extends Model implements SluggableInterface
 
     protected $fillable = ['label', 'progress'];
 
+    public static function boot()
+    {
+        parent::boot();
+        Miniature::deleting(function($miniature) {
+            foreach($miniature->photos as $photo) {
+                $photo->delete();
+            }
+        });
+    }
+
     public function collection()
     {
         return $this->belongsTo(Collection::class);

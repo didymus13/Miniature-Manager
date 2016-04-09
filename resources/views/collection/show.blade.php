@@ -12,9 +12,10 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"
           rel="stylesheet"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="/vendor/dropzone/dropzone.min.css">
     @endcan
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/css/lightgallery.min.css">
 @endsection
 
 @section('content')
@@ -33,14 +34,6 @@
         </h1>
     </div>
 
-    <ul id="photo-gallery">
-        @foreach($collection->miniatures as $miniature)
-            @foreach($miniature->photos as $photo)
-                <li><img data-lazy="{{ $photo->url }}" alt="{{ $photo->caption }}" /></li>
-            @endforeach
-        @endforeach
-    </ul>
-
     <ul class="list-inline">
         <li><span class="fa fa-user"></span></li>
         <li>{{ $collection->user->name }}</li>
@@ -56,31 +49,47 @@
         @endcannot
     </ul>
 
-        @can('edit', $collection)
-        {!! Form::label('tags', 'Tags') !!}
-        <select multiple="multiple" class="form-control select" name="tags"
-                data-url="{{ route('collections.update', $collection->slug) }}">
-            @foreach(\App\Collection::existingTags() as $tag)
-                <option value="{{ $tag->name }}"
-                        @if(in_array($tag->name, $collection->tagNames())) selected="selected" @endif
-                >
-                    {{ $tag->name }}
-                </option>
+    @can('edit', $collection)
+    {!! Form::label('tags', 'Tags') !!}
+    <select multiple="multiple" class="form-control select" name="tags"
+            data-url="{{ route('collections.update', $collection->slug) }}">
+        @foreach(\App\Collection::existingTags() as $tag)
+            <option value="{{ $tag->name }}"
+                    @if(in_array($tag->name, $collection->tagNames())) selected="selected" @endif
+            >
+                {{ $tag->name }}
+            </option>
+        @endforeach
+    </select>
+    @endcan
+
+    <p data-type="textarea" data-pk="{{ $collection->slug }}" data-name="description"
+       data-url="{{ route('collections.update', $collection->slug) }}" data-title="Name" class="editable">
+        {{ $collection->description }}
+    </p>
+
+    <!-- photo Gallery -->
+    <div id="photo-gallery" class="hidden">
+        @foreach($collection->miniatures as $miniature)
+            @foreach($miniature->photos as $photo)
+                    <a href="/uploads/{{ $photo->url }}" class="img-thumbnail">
+                        <img src="/uploads/{{ $photo->thumb_url }}" alt="{{ $photo->caption }}" />
+                    </a>
             @endforeach
-        </select>
-        @endcan
+        @endforeach
+    </div>
 
-        <p data-type="textarea" data-pk="{{ $collection->slug }}" data-name="description"
-           data-url="{{ route('collections.update', $collection->slug) }}" data-title="Name" class="editable">
-            {{ $collection->description }}
-        </p>
-
+    <!-- Minitures list -->
     <table class="table">
         <caption>Miniatures</caption>
         <thead>
         <tr>
             <th>Name</th>
             <th>Progress</th>
+            <th>Thumbnails</th>
+            @can('edit', $collection)
+            <th>Image Upload</th>
+            @endcan
             <th>Last Updated</th>
         </tr>
         </thead>
@@ -104,6 +113,17 @@
                         </div>
                     </div>
                 </td>
+                <td>
+                    @foreach($mini->photos as $photo)
+                        <img src="/uploads/{{$photo->thumb_url}}" alt="{{ $photo->caption }}" class="img-thumbnail" style="width: 10%"/>
+                    @endforeach
+                </td>
+                @can('edit', $mini)
+                <td>
+                    {!! Form::open(['method' => 'POST', 'route' => ['miniatures.photos', $mini->slug], 'class' => 'dropzone']) !!}
+                    {!! Form::close() !!}
+                </td>
+                @endcan
                 <td>{{ $mini->updated_at->diffForHumans() }}</td>
                 @can('delete', $mini)
                 <td>
@@ -136,24 +156,28 @@
 @endsection
 
 @section('endBody')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/js/lightgallery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/js/lg-thumbnail.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/js/lg-zoom.min.js"></script>
+    <!-- A jQuery plugin that adds cross-browser mouse wheel support. (Optional) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+    <script>
+        $(function() {
+            $('#photo-gallery').lightGallery({
+                thumbnail: true
+            });
+        })
+        $('#photo-gallery').removeClass('hidden');
+    </script>
     @can('edit', $collection)
     <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/i18n/en.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"></script>
+    <script src="/vendor/dropzone/dropzone.min.js"></script>
     <script>
         $(function () {
             $('.select').select2({
                 tags: true
-            });
-            $('#photo-gallery').slick({
-                lazyLoad: 'ondemand',
-                lazyLoadBuffer: 0,
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                centerMode: true,
-                variableWidth: true,
-                dots: true
             });
             $.fn.editable.defaults.ajaxOptions = {method: 'PATCH'};
             $(".editable").editable({
@@ -191,6 +215,7 @@
                     }
                 })
             });
+
             $('.select').on('change', function (event) {
                 console.log($(this).val());
                 $.ajax({
