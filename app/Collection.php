@@ -28,6 +28,16 @@ class Collection extends Model implements SluggableInterface
         });
     }
 
+    public function getFeaturedImageAttribute()
+    {
+        foreach ($this->miniatures()->with('photos')->get() as $mini) {
+            foreach($mini->photos as $photo) {
+                return $photo;
+            }
+        };
+        return null;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

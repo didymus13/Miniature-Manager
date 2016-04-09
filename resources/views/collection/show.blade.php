@@ -10,11 +10,9 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ route('collections.show', $collection->slug, true) }}" />
 
-    {{--@if($collection->miniatures && $collection->miniatures()->first()->photos)--}}
-        {{--<meta property="og:image"--}}
-              {{--content="{{ url('/uploads/' . $collection->miniatures()->first()->photos()->first()->url) }}"--}}
-        {{--/>--}}
-    {{--@endif--}}
+    @if($collection->featuredImage)
+        <meta property="og:image" content="{{ url('/uploads/' . $collection->featuredImage->url) }}" />
+    @endif
 
     <link rel="canonical" href="{{ route('collections.show', $collection->slug, true) }}"/>
     @can('edit', $collection)
