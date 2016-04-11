@@ -6,6 +6,11 @@ php:
   - hhvm
   - nightly
 
+matrix:
+  allowed_failures:
+    - php: hhvm
+    - php: nightly
+
 services:
   - mysql
 
