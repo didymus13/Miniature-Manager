@@ -11,6 +11,7 @@ services:
 
 install:
   - composer install
+  - mysqladmin create -u root minimanager
   - php vendor/bin/codecept bootstrap
   - php artisan migrate
 
