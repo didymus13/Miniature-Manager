@@ -38,6 +38,16 @@ class Collection extends Model implements SluggableInterface
         return null;
     }
 
+    public function getSizeAttribute()
+    {
+        return $this->miniatures()->count();
+    }
+
+    public function getProgressAttribute()
+    {
+        return $this->miniatures->avg('progress');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

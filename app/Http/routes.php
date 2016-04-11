@@ -32,6 +32,7 @@ Route::group(['middleware' => 'web'], function () {
             ['uses' => 'MiniatureController@uploadPhotos', 'as' => 'miniatures.photos']
         );
         Route::resource('/photos', 'PhotoController', ['only' => 'destroy']);
+        Route::resource('/users', 'UserController', ['only' => 'update']);
     });
     
     Route::resource('/collections', 'CollectionController', ['only' => ['index', 'show']]);

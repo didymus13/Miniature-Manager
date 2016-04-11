@@ -8,6 +8,8 @@ use App\Photo;
 use App\Policies\CollectionPolicy;
 use App\Policies\MiniaturePolicy;
 use App\Policies\PhotoPolicy;
+use App\Policies\UserPolicy;
+use App\User;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -23,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         Collection::class => CollectionPolicy::class,
         Miniature::class => MiniaturePolicy::class,
         Photo::class => PhotoPolicy::class,
+        User::class => UserPolicy::class,
     ];
 
     /**
