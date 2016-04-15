@@ -22,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="/vendor/dropzone/dropzone.min.css">
     @endcan
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/css/lightgallery.min.css">
+    {{--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/css/lightgallery.min.css">--}}
 @endsection
 
 @section('content')
@@ -76,12 +76,14 @@
     </p>
 
     <!-- photo Gallery -->
-    <div id="photo-gallery" class="hidden">
+    <div id="photo-gallery" class="row">
         @foreach($collection->miniatures as $miniature)
             @foreach($miniature->photos as $photo)
-                    <a href="/uploads/{{ $photo->url }}" class="img-thumbnail">
-                        <img src="/uploads/{{ $photo->thumb_url }}" alt="{{ $photo->caption }}" />
+                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                    <a href="{{ route('photos.show', $photo->id) }}">
+                        <img src="{{ url('/uploads/' . $photo->thumb_url) }}" alt="{{ $photo->caption }}" class="img-responsive"/>
                     </a>
+                </div>
             @endforeach
         @endforeach
     </div>
@@ -170,19 +172,12 @@
 @endsection
 
 @section('endBody')
-    <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/js/lightgallery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/js/lg-thumbnail.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/js/lg-zoom.min.js"></script>
+    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/js/lightgallery.min.js"></script>--}}
+    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/js/lg-thumbnail.min.js"></script>--}}
+    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/js/lg-zoom.min.js"></script>--}}
     <!-- A jQuery plugin that adds cross-browser mouse wheel support. (Optional) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
-    <script>
-        $(function() {
-            $('#photo-gallery').lightGallery({
-                thumbnail: true
-            });
-        })
-        $('#photo-gallery').removeClass('hidden');
-    </script>
+
     @can('edit', $collection)
     <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>

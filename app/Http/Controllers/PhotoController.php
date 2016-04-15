@@ -21,4 +21,10 @@ class PhotoController extends Controller
         $photo->delete();
         return response()->json(['deleted'], 204);
     }
+
+    public function show($id)
+    {
+        $photo = Photo::find($id)->with('imageable')->firstOrFail();
+        return view('photo.show', ['photo' => $photo]);
+    }
 }

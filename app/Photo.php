@@ -31,4 +31,11 @@ class Photo extends Model implements SluggableInterface
             Storage::disk('public')->delete($photo->thumb_url);
         });
     }
+
+    public function getSiblingsAttribute()
+    {
+        return $this->imageable->photos->reject(function($photo) {
+            return $photo->id === $this->id;
+        });
+    }
 }

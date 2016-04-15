@@ -36,4 +36,5 @@ Route::group(['middleware' => 'web'], function () {
     });
     
     Route::resource('/collections', 'CollectionController', ['only' => ['index', 'show']]);
+    Route::resource('/photos', 'PhotoController', ['only' => 'show']);
 });
