@@ -21,6 +21,6 @@ class UserPolicy
 
     public function edit(User $authUser, User $user)
     {
-        return $authUser->id === $user->id;
+        return $authUser->id == $user->id;
     }
 }
