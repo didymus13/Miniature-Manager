@@ -22,11 +22,11 @@ class CollectionPolicy
 
     public function edit(User $user, Collection $collection)
     {
-        return $user->id === $collection->user_id;
+        return $user->id == $collection->user_id;
     }
 
     public function delete(User $user, Collection $collection)
     {
-        return $user->id === $collection->user_id;
+        return $user->id == $collection->user_id;
     }
 }
