@@ -1,0 +1,31 @@
+table .progress {
+  margin-bottom: 0; }
+
+.btn-twitter {
+  background: #00acee;
+  color: #fff; }
+  .btn-twitter:link, .btn-twitter:visited {
+    color: #fff; }
+  .btn-twitter:active, .btn-twitter:visited {
+    background: #0087bd;
+    color: #fff; }
+
+.btn-facebook {
+  background: #3b5998;
+  color: #fff; }
+  .btn-facebook:link, .btn-facebook:visited {
+    color: #fff; }
+  .btn-facebook:active, .btn-facebook:hover {
+    background: #30477a;
+    color: #fff; }
+
+.btn-pinterest {
+  background: #bd081c;
+  color: #fff; }
+  .btn-pinterest:link, .btn-pinterest:visited {
+    color: #fff; }
+  .btn-pinterest:active, .btn-pinterest:hover {
+    background: #bd081c;
+    color: #fff; }
+
+/*# sourceMappingURL=app.css.map */

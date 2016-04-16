@@ -21,6 +21,20 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-
     Route::get('/home', 'HomeController@index');
+
+    // Authenticated Users Only
+    Route::group(['middleware' => 'auth'], function () {
+        Route::resource('/collections', 'CollectionController', ['except' => ['index', 'show']]);
+        Route::resource('/miniatures', 'MiniatureController', ['only' => ['update', 'store', 'destroy', 'photos']]);
+        Route::post(
+            '/miniatures/{slug}/photos',
+            ['uses' => 'MiniatureController@uploadPhotos', 'as' => 'miniatures.photos']
+        );
+        Route::resource('/photos', 'PhotoController', ['only' => 'destroy']);
+        Route::resource('/users', 'UserController', ['only' => 'update']);
+    });
+    
+    Route::resource('/collections', 'CollectionController', ['only' => ['index', 'show']]);
+    Route::resource('/photos', 'PhotoController', ['only' => 'show']);
 });
