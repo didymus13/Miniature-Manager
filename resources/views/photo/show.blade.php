@@ -31,7 +31,7 @@
         <h2>Other photos</h2>
         <div class="row">
             @foreach($photo->siblings as $related)
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2">
                     <a href="{{ route('photos.show', $related->id) }}">
                         <img src="{{ url('/uploads/' . $related->url) }}" alt="related photo" class="img-responsive"/>
                     </a>
