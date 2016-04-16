@@ -22,11 +22,11 @@ class MiniaturePolicy
 
     public function edit(User $user, Miniature $mini)
     {
-        return $user->id === $mini->collection->user->id;
+        return $user->id == $mini->collection->user->id;
     }
 
     public function delete(User $user, Miniature $mini)
     {
-        return $user->id === $mini->collection->user->id;
+        return $user->id == $mini->collection->user->id;
     }
 }

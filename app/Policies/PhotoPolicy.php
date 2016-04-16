@@ -22,11 +22,11 @@ class PhotoPolicy
 
     public function edit(User $user, Photo $photo)
     {
-        return $user->id === $photo->miniature->collection->user->id;
+        return $user->id == $photo->miniature->collection->user->id;
     }
 
     public function delete(User $user, Photo $photo)
     {
-        return $user->id === $photo->imageable->collection->user->id;
+        return $user->id == $photo->imageable->collection->user->id;
     }
 }
