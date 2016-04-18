@@ -219,7 +219,6 @@
                     data: {_token: '{{ $token }}'},
                     statusCode: {
                         204: function (response) {
-                            console.log(row);
                             deleteThis.fadeOut(750, function () {
                                 $(this).remove()
                             });

@@ -22,7 +22,7 @@ class Collection extends Model implements SluggableInterface
     {
         parent::boot();
         Collection::deleting(function($collection) {
-            foreach($collection->miniatures() as $mini) {
+            foreach($collection->miniatures as $mini) {
                 $mini->delete();
             }
         });
