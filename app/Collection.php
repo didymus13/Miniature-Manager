@@ -45,7 +45,7 @@ class Collection extends Model implements SluggableInterface
 
     public function getProgressAttribute()
     {
-        return $this->miniatures->avg('progress');
+        return round($this->miniatures->avg('progress'), 0);
     }
 
     public function user()

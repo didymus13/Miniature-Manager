@@ -36,4 +36,12 @@ class Miniature extends Model implements SluggableInterface
     {
         return $this->morphMany(Photo::class, 'imageable');
     }
+
+    public function getFeaturedImageAttribute()
+    {
+        foreach($this->photos as $photo) {
+            return $photo;
+        }
+        return null;
+    }
 }

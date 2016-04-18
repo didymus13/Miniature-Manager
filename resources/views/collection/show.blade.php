@@ -26,6 +26,9 @@
 @endsection
 
 @section('content')
+
+    {!! Breadcrumbs::render('collection', $collection) !!}
+
     @can('delete', $collection)
     {!! Form::open(['route' => ['collections.destroy', $collection->slug], 'method' => 'DELETE']) !!}
     <div class="pull-right">

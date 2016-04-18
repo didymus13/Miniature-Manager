@@ -5,6 +5,7 @@
     <link rel="canonical" href="{{ url('/', true) }}"/>
 
 @section('content')
+    {!! Breadcrumbs::render('home') !!}
     <div class="page-header">
         <h1>Hobby showcase</h1>
     </div>

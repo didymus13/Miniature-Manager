@@ -13,6 +13,12 @@ use Intervention\Image\Facades\Image;
 
 class MiniatureController extends Controller
 {
+    public function show($slug)
+    {
+        $mini = Miniature::findBySlugOrFail($slug);
+        return view('miniature.show', ['miniature' => $mini]);
+    }
+
     public function store(Requests\MiniatureRequest $request)
     {
         $collection = Collection::findBySlugOrFail($request->get('collection'));

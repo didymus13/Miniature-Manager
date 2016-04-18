@@ -8,6 +8,8 @@
 @endsection
 
 @section('content')
+    {!! Breadcrumbs::render('photo',$photo) !!}
+
     <div class="page-header">
         <h1>Photo for {{ $photo->imageable->label }}</h1>
     </div>
@@ -27,7 +29,7 @@
         </div>
     </div>
 
-    @if($photo->siblings)
+    @if(count($photo->siblings) > 0)
         <h2>Other photos</h2>
         <div class="row">
             @foreach($photo->siblings as $related)
