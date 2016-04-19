@@ -1,4 +1,9 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+.navbar-nav>li>a.profile-image {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 table .progress {
   margin-bottom: 0;
 }

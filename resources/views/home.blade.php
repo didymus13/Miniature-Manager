@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-    <div class="page-heading">
+    <div class="page-header">
         <h1>Your dashboard</h1>
     </div>
 
@@ -20,8 +20,11 @@
         <!-- Profile Editor -->
         <div class="col-xs-12 col-sm-6">
             <h2>Your Profile</h2>
-            <hr />
-            <ul>
+            <ul class="list-unstyled">
+                <li>
+                    <img src="http://www.gravatar.com/avatar/{{ md5(Auth::user()->email) }}?s=180" alt=""
+                         class="img-rounded profile-image" />
+                </li>
                 <li>
                     Name:
                     <span data-type="text" data-pk="{{ $user->slug }}" data-name="name"
