@@ -13,6 +13,12 @@ use Intervention\Image\Facades\Image;
 
 class MiniatureController extends Controller
 {
+    public function show($slug)
+    {
+        $mini = Miniature::findBySlugOrFail($slug);
+        return view('miniature.show', ['miniature' => $mini]);
+    }
+
     public function store(Requests\MiniatureRequest $request)
     {
         $collection = Collection::findBySlugOrFail($request->get('collection'));
@@ -82,7 +88,7 @@ class MiniatureController extends Controller
         $disk->put($fullImagePath, $image->stream());
 
         // Make Thumbnail
-        $image->fit(180, 180, function ($constraint) {
+        $image->fit(360, 360, function ($constraint) {
             $constraint->upsize();
         });
         $disk->put($thumbnailImagePath, $image->stream());

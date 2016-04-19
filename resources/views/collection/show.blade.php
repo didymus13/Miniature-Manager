@@ -26,6 +26,9 @@
 @endsection
 
 @section('content')
+
+    {!! Breadcrumbs::render('collection', $collection) !!}
+
     @can('delete', $collection)
     {!! Form::open(['route' => ['collections.destroy', $collection->slug], 'method' => 'DELETE']) !!}
     <div class="pull-right">
@@ -216,7 +219,6 @@
                     data: {_token: '{{ $token }}'},
                     statusCode: {
                         204: function (response) {
-                            console.log(row);
                             deleteThis.fadeOut(750, function () {
                                 $(this).remove()
                             });
