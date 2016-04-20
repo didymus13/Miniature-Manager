@@ -62,4 +62,9 @@ class Collection extends Model implements SluggableInterface
     {
         return $this->morphToMany(Photo::class, 'imageable');
     }
+
+    public function scopeDefaultOrder($query)
+    {
+        return $query->orderBy('updated_at', 'desc');
+    }
 }
