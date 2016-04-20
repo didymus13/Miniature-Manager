@@ -26,7 +26,7 @@
     </style>
 </head>
 <body id="app-layout">
-    @include('main_menu');
+    @include('main_menu')
 
     <div class="container">
         @yield('content')
