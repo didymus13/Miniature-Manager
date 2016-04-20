@@ -75,5 +75,6 @@ class CollectionCest
         $I->see($mini->label);
         $I->see($mini->progress);
         $I->see($mini->updated_at->diffForHumans());
+        $I->seeElement('div.ads');
     }
 }

@@ -15,7 +15,7 @@
     </div>
 
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9" id="photo">
             <img src="{{ url('/uploads/' . $photo->url) }}" alt="related photo" class="img-responsive"/>
 
             <!-- Share Buttons -->
@@ -25,7 +25,9 @@
                 </a>
                 <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
             </div>
-
+        </div>
+        <div class="ads col-xs-12 col-sm-12 col-md-4 col-lg-3">
+            @include('ads')
         </div>
     </div>
 

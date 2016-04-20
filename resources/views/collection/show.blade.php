@@ -73,11 +73,20 @@
     </select>
     @endcan
 
-    <p data-type="textarea" data-pk="{{ $collection->slug }}" data-name="description"
-       data-url="{{ route('collections.update', $collection->slug) }}" data-title="Name" class="editable">
-        {{ $collection->description }}
-    </p>
-
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
+            <p data-type="textarea" data-pk="{{ $collection->slug }}" data-name="description"
+               data-url="{{ route('collections.update', $collection->slug) }}" data-title="Name" class="editable">
+                {{ $collection->description }}
+            </p>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ads">
+            @can('edit', $collection)
+            @else
+                @include('ads')
+            @endcan
+        </div>
+    </div>
     <!-- photo Gallery -->
     <div id="photo-gallery" class="row">
         @foreach($collection->miniatures as $miniature)
