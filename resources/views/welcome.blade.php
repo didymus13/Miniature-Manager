@@ -46,7 +46,7 @@
         <div class="col-xs-12 col-sm-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Last Updated Collection
+                    Most Viewed Collection
                 </div>
                 <div class="panel-body">
                     <a href="{{ route('collections.show', $homepage->mostViewedCollection->slug) }}">
