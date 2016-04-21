@@ -19,8 +19,11 @@ class CollectionController extends Controller
     public function index(Request $request)
     {
         $tags = $request->get('tags');
-        $collections = $tags ? Collection::withAnyTag($tags)->paginate() : Collection::paginate();
-        return view('collection.index', ['collections' => $collections]);
+        $collections = Collection::defaultOrder();
+        if ($tags) {
+            $collections = $collections->withAnyTag($tags);
+        }
+        return view('collection.index', ['collections' => $collections->paginate()]);
     }
 
     /**
