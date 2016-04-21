@@ -24,7 +24,7 @@ class PhotoController extends Controller
 
     public function show($id)
     {
-        $photo = Photo::find($id)->with('imageable')->firstOrFail();
+        $photo = Photo::where('id', $id)->with('imageable')->firstOrFail();
         return view('photo.show', ['photo' => $photo]);
     }
 }
