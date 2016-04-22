@@ -48,3 +48,14 @@ table .progress {
     color: #fff;
   }
 }
+
+$nums: 1 2 3 4 5 6 7 8 9 10 11 12;
+$sizes: xs sm md lg;
+@each $size in $sizes {
+  @each $num in $nums {
+    .col-#{$size}-#{$num} {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+}
