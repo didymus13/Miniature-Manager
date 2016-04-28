@@ -33,3 +33,10 @@ $factory->define(\App\Miniature::class, function (\Faker\Generator $faker) {
         'progress' => $faker->numberBetween(0, 100)
     ];
 });
+
+$factory->define(\App\Photo::class, function (\Faker\Generator $faker) {
+    return [
+        'url' => $faker->imageUrl(),
+        'caption' => $faker->sentence
+    ];
+});

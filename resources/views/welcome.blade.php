@@ -14,9 +14,9 @@
         <div class="col-xs-12 col-sm-8 col-md-9">
             <div class="row">
                 @foreach($homepage->newPhotos as $photo)
-                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2">
+                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
                         <a href="{{ route('photos.show', $photo->id) }}">
-                            <img src="{{ url('/uploads/' . $photo->url) }}" alt="{{ $photo->caption }}"
+                            <img src="{{ url('/uploads/' . $photo->thumb_url) }}" alt="{{ $photo->caption }}"
                                  class="img-responsive"/>
                         </a>
                     </div>
@@ -51,7 +51,7 @@
                 <div class="panel-body">
                     <a href="{{ route('collections.show', $homepage->mostViewedCollection->slug) }}">
                         @if($homepage->mostViewedCollection->featuredImage)
-                            <img src="{{ url('/uploads/' . $homepage->mostViewedCollection->featuredImage->url) }}"
+                            <img src="{{ url('/uploads/' . $homepage->mostViewedCollection->featuredImage->thumb_url) }}"
                                  class="img-responsive" alt="{{ $homepage->mostViewedCollection->label }}">
                         @endif
                         {{ $homepage->mostViewedCollection->label }}
@@ -71,7 +71,7 @@
                 <div class="panel-body">
                     <a href="{{ route('collections.show', $homepage->lastUpdatedCollection->slug) }}">
                         @if($homepage->lastUpdatedCollection->featuredImage)
-                            <img src="{{ url('/uploads/' . $homepage->lastUpdatedCollection->featuredImage->url) }}"
+                            <img src="{{ url('/uploads/' . $homepage->lastUpdatedCollection->featuredImage->thumb_url) }}"
                                  class="img-responsive" alt="{{ $homepage->lastUpdatedCollection->label }}">
                         @endif
                         {{ $homepage->lastUpdatedCollection->label }}
@@ -81,16 +81,7 @@
         </div>
         @endif
         <div class="col-xs-12 col-sm-4">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- ResponsiveBlock -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-7113319988018316"
-                 data-ad-slot="4780040988"
-                 data-ad-format="auto"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            @include('ads')
         </div>
     </div>
 @endsection

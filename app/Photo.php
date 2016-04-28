@@ -26,9 +26,14 @@ class Photo extends Model implements SluggableInterface
     public static function boot()
     {
         parent::boot();
+
         Photo::deleting( function($photo) {
             Storage::disk('public')->delete($photo->url);
             Storage::disk('public')->delete($photo->thumb_url);
+        });
+
+        Photo::saved(function ($photo) {
+            $photo->imageable->collection->touch();
         });
     }
 
