@@ -43,4 +43,14 @@ class Photo extends Model implements SluggableInterface
             return $photo->id === $this->id;
         });
     }
+
+    public function getFullUrlAttribute()
+    {
+        return url('/uploads/' . $this->url);
+    }
+
+    public function getFullThumbnailUrlAttribute()
+    {
+        return url('/uploads/' . $this->thumb_url);
+    }
 }

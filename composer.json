@@ -13,7 +13,8 @@
         "laravelcollective/Html": "^5.2",
         "intervention/image": "^2.3",
         "predis/predis": "^1.0",
-        "davejamesmiller/laravel-breadcrumbs": "^3.0"
+        "davejamesmiller/laravel-breadcrumbs": "^3.0",
+        "roumen/sitemap": "^2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

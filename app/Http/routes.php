@@ -31,4 +31,5 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('/collections', 'CollectionController', ['only' => ['index', 'show']]);
     Route::resource('/miniatures', 'MiniatureController', ['only' => ['show']]);
     Route::resource('/photos', 'PhotoController', ['only' => 'show']);
+    Route::get('/sitemap', ['as' => 'sitemap.index', 'uses' => 'SitemapController@index']);
 });
