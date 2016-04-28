@@ -222,6 +222,9 @@
                     return;
                 }
                 var deleteThis = $(this).closest('tr');
+                if ($(this).is('img')) {
+                    deleteThis = $(this);
+                }
                 $.ajax({
                     url: $(this).data('url'),
                     type: 'DELETE',
