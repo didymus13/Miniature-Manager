@@ -18,7 +18,7 @@ class Homepage
     public $mostViewedCollection = null;
     public $lastUpdatedCollection = null;
 
-    protected $photoLimit = 8;
+    protected $photoLimit = 12;
 
     public function __construct()
     {
