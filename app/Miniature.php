@@ -20,10 +20,15 @@ class Miniature extends Model implements SluggableInterface
     public static function boot()
     {
         parent::boot();
+
         Miniature::deleting(function($miniature) {
             foreach($miniature->photos as $photo) {
                 $photo->delete();
             }
+        });
+
+        Miniature::saved(function ($miniature) {
+            $miniature->collection->touch();
         });
     }
 
