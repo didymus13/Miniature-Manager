@@ -3,14 +3,6 @@
 
 class PhotoCest
 {
-    public function _before(FunctionalTester $I)
-    {
-    }
-
-    public function _after(FunctionalTester $I)
-    {
-    }
-
     // tests
     public function tryToShowPhoto(FunctionalTester $I)
     {
@@ -27,5 +19,11 @@ class PhotoCest
         $I->seeResponseCodeIs(200);
         $I->seeElement('div#photo');
         $I->seeElement('div.ads');
+    }
+
+    public function addPhotoTitle()
+    {
+        $photo = factory(\App\Photo::class)->make();
+        $this->assertNot
     }
 }
