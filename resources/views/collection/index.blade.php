@@ -10,41 +10,49 @@
         @endif
     </div>
 
-    <table class="table table-striped table-hover">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Tags</th>
-            <th>Last Updated</th>
-            <th>Progress</th>
-        </tr>
-        </thead>
-
-        <tbody>
         @foreach($collections as $collection)
-            <tr>
-                <td><a href="{{ route('collections.show', $collection->slug) }}">{{ $collection->label }}</a></td>
-                <td>
-                    <ul class="list-inline">
-                        @foreach($collection->tags as $tag)
-                            <li>
-                                <a href="{{ route('collections.index', ['tags' => $tag->slug]) }}" class="btn btn-xs btn-default">
-                                    {{ $tag->name }}
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-2">
+                            @if ($collection->featuredImage)
+                                <a href="{{ route('collections.show', $collection->slug) }}">
+                                    <img src="{{$collection->featuredImage->fullThumbnailUrl}}" class="img-responsive"
+                                         alt="{{ $collection->featuredImage->caption }}" />
                                 </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </td>
-                <td>{{ $collection->updated_at->diffForHumans() }}</td>
-                <td>
-                    <div class="progress">
-                        <div class="progress-bar" style="width: {{ $collection->progress }}%">
-                            {{ $collection->progress }}%
+                            @endif
+                        </div>
+
+                        <div class="col-xs-6 col-sm-10">
+                            <div class="progress">
+                                <div class="progress-bar" style="width: {{ $collection->progress }}%">
+                                    {{ $collection->progress }}%
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-4">
+                            <a href="{{ route('collections.show', $collection->slug) }}">{{ $collection->label }}</a>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-4">
+                            <ul class="list-inline">
+                                <li>Tags:</li>
+                                @foreach($collection->tags as $tag)
+                                    <li>
+                                        <a href="{{ route('collections.index', ['tags' => $tag->slug]) }}" class="btn btn-xs btn-default">
+                                            {{ $tag->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="col-xs-6 col-sm-2">
+                            <span class="fa fa-fw fa-clock-o"></span>
+                            {{ $collection->updated_at->diffForHumans() }}
                         </div>
                     </div>
-                </td>
-            </tr>
+                </div>
+            </div>
         @endforeach
-        </tbody>
-    </table>
 @endsection
