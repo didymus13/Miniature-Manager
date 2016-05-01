@@ -11,7 +11,7 @@ class Photo extends Model implements SluggableInterface
 {
     use SluggableTrait;
 
-    protected $fillable = ['url', 'caption'];
+    protected $fillable = ['url', 'caption', 'title'];
 
     protected $sluggable = [
         'build_from' => 'caption',

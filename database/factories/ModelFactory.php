@@ -37,6 +37,7 @@ $factory->define(\App\Miniature::class, function (\Faker\Generator $faker) {
 $factory->define(\App\Photo::class, function (\Faker\Generator $faker) {
     return [
         'url' => $faker->imageUrl(),
-        'caption' => $faker->sentence
+        'caption' => $faker->sentence,
+        'title' => $faker->sentence
     ];
 });

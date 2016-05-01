@@ -63,7 +63,7 @@ class SitemapController extends Controller
         foreach ($photos as $photo) {
             $out[] = [
                 'url' => $photo->fullUrl,
-                'title' => $photo->caption,
+                'title' => $photo->title,
                 'caption' => $photo->caption
             ];
         }

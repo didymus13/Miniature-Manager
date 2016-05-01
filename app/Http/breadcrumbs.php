@@ -26,5 +26,5 @@ Breadcrumbs::register('miniature', function($breadcrumbs, $miniature) {
 
 Breadcrumbs::register('photo', function($breadcrumbs, $photo) {
     $breadcrumbs->parent('miniature', $photo->imageable);
-    $breadcrumbs->push($photo->caption, route('photos.show', $photo->id));
+    $breadcrumbs->push($photo->title, route('photos.show', $photo->id));
 });
