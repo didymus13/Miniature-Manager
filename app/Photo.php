@@ -33,7 +33,7 @@ class Photo extends Model implements SluggableInterface
         });
 
         Photo::saved(function ($photo) {
-            $photo->imageable->collection->touch();
+            $photo->imageable->touch();
         });
     }
 

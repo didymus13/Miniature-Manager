@@ -39,10 +39,7 @@
             </div>
         </div>
         <div class="ads col-xs-12 col-sm-12 col-md-4 col-lg-3">
-            @can('edit', $photo)
-            @else
-                @include('ads')
-            @endcan
+            @include('ads')
         </div>
     </div>
 
