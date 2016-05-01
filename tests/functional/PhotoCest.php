@@ -20,10 +20,4 @@ class PhotoCest
         $I->seeElement('div#photo');
         $I->seeElement('div.ads');
     }
-
-    public function addPhotoTitle()
-    {
-        $photo = factory(\App\Photo::class)->make();
-        $this->assertNot
-    }
 }

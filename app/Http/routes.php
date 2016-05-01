@@ -24,7 +24,7 @@ Route::group(['middleware' => 'web'], function () {
             '/miniatures/{slug}/photos',
             ['uses' => 'MiniatureController@uploadPhotos', 'as' => 'miniatures.photos']
         );
-        Route::resource('/photos', 'PhotoController', ['only' => 'destroy']);
+        Route::resource('/photos', 'PhotoController', ['only' => ['destroy', 'update']]);
         Route::resource('/users', 'UserController', ['only' => 'update']);
     });
     
