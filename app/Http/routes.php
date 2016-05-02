@@ -32,4 +32,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('/miniatures', 'MiniatureController', ['only' => ['show']]);
     Route::resource('/photos', 'PhotoController', ['only' => 'show']);
     Route::get('/sitemap', ['as' => 'sitemap.index', 'uses' => 'SitemapController@index']);
+
+    Route::get('/privacy-policy', ['as' => 'privacy-policy', 'uses' => function() {
+        return view('pages.privacy_policy');
+    }]);
 });
