@@ -9,6 +9,7 @@
         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=1381428168817046";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 {{--end share button code--}}
 
 <ul class="list-inline">
@@ -20,6 +21,11 @@
     {{--Twitter Share Button--}}
     @if (!$exclude || !in_array('twitter', $exclude))
         <li><a href="https://twitter.com/share" class="twitter-share-button">Tweet</a></li>
+    @endif
+
+    {{--Google+ Share Button--}}
+    @if (!$exclude || !in_array('google-plus', $exclude))
+        <li><g:plus action="share" data-annotation="none"></g:plus></li>
     @endif
 
     {{--Pinterest share button--}}
