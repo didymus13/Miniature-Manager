@@ -18,7 +18,7 @@
     <div class="row">
 
         <!-- Profile Editor -->
-        <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 col-sm-4">
             <h2>Your Profile</h2>
             <ul class="list-unstyled">
                 <li>
@@ -42,7 +42,7 @@
         </div>
 
         <!-- Collection List -->
-        <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 col-sm-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Your model collections
