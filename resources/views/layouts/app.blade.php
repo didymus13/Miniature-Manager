@@ -29,7 +29,15 @@
     @include('main_menu')
 
     <div class="container">
-        @yield('content')
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-9">
+                @yield('content')
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-3 ads">
+                @include('ads')
+            </div>
+        </div>
+
     </div>
 
     <div class="footer text-center">
