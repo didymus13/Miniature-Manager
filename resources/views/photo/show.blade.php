@@ -22,9 +22,9 @@
         </h1>
     </div>
 
-    <p>
+    <div id="photo">
         <img src="{{ url('/uploads/' . $photo->url) }}" alt="related photo" class="img-responsive"/>
-    </p>
+    </div>
 
     @include('share_buttons', [
         'exclude' => false,
