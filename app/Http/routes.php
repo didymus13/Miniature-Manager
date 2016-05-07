@@ -36,4 +36,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/privacy-policy', ['as' => 'privacy-policy', 'uses' => function() {
         return view('pages.privacy_policy');
     }]);
+
+    Route::get('/terms-of-service', ['as' => 'terms-of-service', 'uses' => function() {
+        return view('pages.terms_of_service');
+    }]);
 });

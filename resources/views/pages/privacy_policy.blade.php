@@ -5,68 +5,23 @@
 @endsection
 
 @section('content')
-    <div class="page-header">
-        <h1>Privacy Policy</h1>
-    </div>
-    <p>This Privacy Policy governs the manner in which Hobby Showcase collects, uses, maintains and discloses information collected from users (each, a "User") of the http://showcase.stephanedoiron.com website ("Site").</p>
-
-    <h3>Personal identification information</h3>
-    <p>We may collect personal identification information from Users in a variety of ways, including, but not limited to, when Users visit our site, register on the site, and in connection with other activities, services, features or resources we make available on our Site. Users may be asked for, as appropriate, name, email address. Users may, however, visit our Site anonymously. We will collect personal identification information from Users only if they voluntarily submit such information to us. Users can always refuse to supply personally identification information, except that it may prevent them from engaging in certain Site related activities.</p>
-
-    <h3>Non-personal identification information</h3>
-    <p>We may collect non-personal identification information about Users whenever they interact with our Site. Non-personal identification information may include the browser name, the type of computer and technical information about Users means of connection to our Site, such as the operating system and the Internet service providers utilized and other similar information.</p>
-
-    <h3>Web browser cookies</h3>
-    <p>Our Site may use "cookies" to enhance User experience. User's web browser places cookies on their hard drive for record-keeping purposes and sometimes to track information about them. User may choose to set their web browser to refuse cookies, or to alert you when cookies are being sent. If they do so, note that some parts of the Site may not function properly.</p>
-
-    <h3>How we use collected information</h3>
-    <p>Hobby Showcase may collect and use Users personal information for the following purposes:</p>
-    <ul>
-        <li>
-            <i>To run and operate our Site</i><br/>
-            We may need your information display content on the Site correctly.
-        </li>
-        <li>
-            <i>To improve customer service</i><br/>
-            Information you provide helps us respond to your customer service requests and support needs more efficiently.
-        </li>
-        <li>
-            <i>To personalize user experience</i><br/>
-            We may use information in the aggregate to understand how our Users as a group use the services and resources provided on our Site.
-        </li>
-        <li>
-            <i>To improve our Site</i><br/>
-            We may use feedback you provide to improve our products and services.
-        </li>
-        <li>
-            <i>To send periodic emails</i><br/>
-            We may use the email address to send User information and updates pertaining to their order. It may also be used to respond to their inquiries, questions, and/or other requests.
-        </li>
-    </ul>
-
-    <h3>How we protect your information</h3>
-    <p>We adopt appropriate data collection, storage and processing practices and security measures to protect against unauthorized access, alteration, disclosure or destruction of your personal information, username, password, transaction information and data stored on our Site.</p>
-
-    <h3>Sharing your personal information</h3>
-    <p>We do not sell, trade, or rent Users personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information regarding visitors and users with our business partners, trusted affiliates and advertisers for the purposes outlined above. </p>
-
-    <h3>Third party websites</h3>
-    <p>Users may find advertising or other content on our Site that link to the sites and services of our partners, suppliers, advertisers, sponsors, licensors and other third parties. We do not control the content or links that appear on these sites and are not responsible for the practices employed by websites linked to or from our Site. In addition, these sites or services, including their content and links, may be constantly changing. These sites and services may have their own privacy policies and customer service policies. Browsing and interaction on any other website, including websites which have a link to our Site, is subject to that website's own terms and policies.</p>
-
-    <h3>Advertising</h3>
-    <p>Ads appearing on our site may be delivered to Users by advertising partners, who may set cookies. These cookies allow the ad server to recognize your computer each time they send you an online advertisement to compile non personal identification information about you or others who use your computer. This information allows ad networks to, among other things, deliver targeted advertisements that they believe will be of most interest to you. This privacy policy does not cover the use of cookies by any advertisers.</p>
-
-    <h3>Google Adsense</h3>
-    <p>Some of the ads may be served by Google. Google's use of the DART cookie enables it to serve ads to Users based on their visit to our Site and other sites on the Internet. DART uses "non personally identifiable information" and does NOT track personal information about you, such as your name, email address, physical address, etc. You may opt out of the use of the DART cookie by visiting the Google ad and content network privacy policy at <a href="http://www.google.com/privacy_ads.html">http://www.google.com/privacy_ads.html</a></p>
-
-    <h3>Changes to this privacy policy</h3>
-    <p>Hobby Showcase has the discretion to update this privacy policy at any time. When we do, we will post a notification on the main page of our Site. We encourage Users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect. You acknowledge and agree that it is your responsibility to review this privacy policy periodically and become aware of modifications.</p>
-
-    <h3>Your acceptance of these terms</h3>
-    <p>By using this Site, you signify your acceptance of this policy. If you do not agree to this policy, please do not use our Site. Your continued use of the Site following the posting of changes to this policy will be deemed your acceptance of those changes. This policy was generated using <a href="http://privacypolicies.com" target="_blank">privacypolicies.com</a></p>
-
-    <h3>Contacting us</h3>
-    <p>If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us.</p>
-
-    <p>This document was last updated on May 02, 2016</p>
+    <h1 id='atospp-privacy' class='auto-tos-pp ppheading'>Privacy Policy:</h1>
+    <p>Stephane Doiron.com (&quot;<strong>Stephane Doiron.com</strong>&quot;) operates showcase.stephanedoiron.com and may operate other websites. It is Stephane Doiron.com's policy to respect your privacy regarding any information we may collect while operating our websites.</p>
+    <h3>Website Visitors</h3>
+    <p>Like most website operators, Stephane Doiron.com collects non-personally-identifying information of the sort that web browsers and servers typically make available, such as the browser type, language preference, referring site, and the date and time of each visitor request. Stephane Doiron.com's purpose in collecting non-personally identifying information is to better understand how Stephane Doiron.com's visitors use its website. From time to time, Stephane Doiron.com may release non-personally-identifying information in the aggregate, e.g., by publishing a report on trends in the usage of its website.</p>
+    <p>Stephane Doiron.com also collects potentially personally-identifying information like Internet Protocol (IP) addresses for logged in users and for users leaving comments on showcase.stephanedoiron.com blogs/sites. Stephane Doiron.com only discloses logged in user and commenter IP addresses under the same circumstances that it uses and discloses personally-identifying information as described below, except that commenter IP addresses and email addresses are visible and disclosed to the administrators of the blog/site where the comment was left.</p>
+    <h3>Gathering of Personally-Identifying Information</h3>
+    <p>Certain visitors to Stephane Doiron.com's websites choose to interact with Stephane Doiron.com in ways that require Stephane Doiron.com to gather personally-identifying information. The amount and type of information that Stephane Doiron.com gathers depends on the nature of the interaction. For example, we ask visitors who sign up  at <a href="http://showcase.stephanedoiron.com">showcase.stephanedoiron.com</a> to provide a username and email address. Those who engage in transactions with Stephane Doiron.com are asked to provide additional information, including as necessary the personal and financial information required to process those transactions. In each case, Stephane Doiron.com collects such information only insofar as is necessary or appropriate to fulfill the purpose of the visitor's interaction with Stephane Doiron.com. Stephane Doiron.com does not disclose personally-identifying information other than as described below. And visitors can always refuse to supply personally-identifying information, with the caveat that it may prevent them from engaging in certain website-related activities.</p>
+    <h3>Aggregated Statistics</h3>
+    <p>Stephane Doiron.com may collect statistics about the behavior of visitors to its websites. Stephane Doiron.com may display this information publicly or provide it to others. However, Stephane Doiron.com does not disclose personally-identifying information other than as described below.</p>
+    <h3>Protection of Certain Personally-Identifying Information</h3>
+    <p>Stephane Doiron.com discloses potentially personally-identifying and personally-identifying information only to those of its employees, contractors and affiliated organizations that (i) need to know that information in order to process it on Stephane Doiron.com's behalf or to provide services available at Stephane Doiron.com's websites, and (ii) that have agreed not to disclose it to others. Some of those employees, contractors and affiliated organizations may be located outside of your home country; by using Stephane Doiron.com's websites, you consent to the transfer of such information to them. Stephane Doiron.com will not rent or sell potentially personally-identifying and personally-identifying information to anyone. Other than to its employees, contractors and affiliated organizations, as described above, Stephane Doiron.com discloses potentially personally-identifying and personally-identifying information only in response to a subpoena, court order or other governmental request, or when Stephane Doiron.com believes in good faith that disclosure is reasonably necessary to protect the property or rights of Stephane Doiron.com, third parties or the public at large. If you are a registered user of an Stephane Doiron.com website and have supplied your email address, Stephane Doiron.com may occasionally send you an email to tell you about new features, solicit your feedback, or just keep you up to date with what's going on with Stephane Doiron.com and our products.  If you send us a request (for example via email or via one of our feedback mechanisms), we reserve the right to publish it in order to help us clarify or respond to your request or to help us support other users. Stephane Doiron.com takes all measures reasonably necessary to protect against the unauthorized access, use, alteration or destruction of potentially personally-identifying and personally-identifying information.</p>
+    <h3>Cookies</h3>
+    <p>A cookie is a string of information that a website stores on a visitor's computer, and that the visitor's browser provides to the website each time the visitor returns. Stephane Doiron.com uses cookies to help Stephane Doiron.com identify and track visitors, their usage of Stephane Doiron.com website, and their website access preferences. Stephane Doiron.com visitors who do not wish to have cookies placed on their computers should set their browsers to refuse cookies before using Stephane Doiron.com's websites, with the drawback that certain features of Stephane Doiron.com's websites may not function properly without the aid of cookies.</p>
+    <h3>Business Transfers</h3>
+    <p>If Stephane Doiron.com, or substantially all of its assets, were acquired, or in the unlikely event that Stephane Doiron.com goes out of business or enters bankruptcy, user information would be one of the assets that is transferred or acquired by a third party. You acknowledge that such transfers may occur, and that any acquirer of Stephane Doiron.com may continue to use your personal information as set forth in this policy.</p>
+    <h3>Ads</h3>
+    <p>Ads appearing on any of our websites may be delivered to users by advertising partners, who may set cookies. These cookies allow the ad server to recognize your computer each time they send you an online advertisement to compile information about you or others who use your computer. This information allows ad networks to, among other things, deliver targeted advertisements that they believe will be of most interest to you. This Privacy Policy covers the use of cookies by Stephane Doiron.com and does not cover the use of cookies by any advertisers.</p>
+    <h3>Privacy Policy Changes</h3>
+    <p>Although most changes are likely to be minor, Stephane Doiron.com may change its Privacy Policy from time to time, and in Stephane Doiron.com's sole discretion. Stephane Doiron.com encourages visitors to frequently check this page for any changes to its Privacy Policy. If you have a showcase.stephanedoiron.com account, you might also receive an alert informing you of these changes. Your continued use of this site after any change in this Privacy Policy will constitute your acceptance of such change.</p>
 @endsection

@@ -41,7 +41,9 @@
     </div>
 
     <div class="footer text-center">
-        <a href="{{ route('privacy-policy') }}">Privacy Policy</a> | Terms of Service
+        <a href="{{ route('privacy-policy') }}">Privacy Policy</a>
+        |
+        <a href="{{ route('terms-of-service') }}">Terms of Service</a>
     </div>
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
