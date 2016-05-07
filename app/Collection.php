@@ -48,6 +48,15 @@ class Collection extends Model implements SluggableInterface
         return round($this->miniatures->avg('progress'), 0);
     }
 
+    public function getPhotosAttribute()
+    {
+        $photos = collect([]);
+        foreach ($this->miniatures as $mini) {
+            $photos = $photos->merge($mini->photos);
+        };
+        return $photos;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

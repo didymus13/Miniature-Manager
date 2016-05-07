@@ -60,7 +60,7 @@ class MiniatureController extends Controller
         $user = $mini->collection->user;
 
         $photo = new Photo([
-            'caption' => $file->getClientOriginalName(),
+            'title' => $file->getClientOriginalName(),
         ]);
         $mini->photos()->save($photo);
 

@@ -21,8 +21,6 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/vendor/dropzone/dropzone.min.css">
     @endcan
-
-    {{--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/css/lightgallery.min.css">--}}
 @endsection
 
 @section('content')
@@ -59,6 +57,8 @@
         @endcannot
     </ul>
 
+    @include('share_buttons', ['exclude' => ['pinterest'], 'shareUrl' => route('collections.show', $collection->slug, true)])
+
     @can('edit', $collection)
     {!! Form::label('tags', 'Tags') !!}
     <select multiple="multiple" class="form-control select" name="tags"
@@ -73,34 +73,26 @@
     </select>
     @endcan
 
-    <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
-            <p data-type="textarea" data-pk="{{ $collection->slug }}" data-name="description"
-               data-url="{{ route('collections.update', $collection->slug) }}" data-title="Name" class="editable">
-                {{ $collection->description }}
-            </p>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ads">
-            @can('edit', $collection)
-            @else
-                @include('ads')
-            @endcan
-        </div>
-    </div>
+    <p data-type="textarea" data-pk="{{ $collection->slug }}" data-name="description"
+       data-url="{{ route('collections.update', $collection->slug) }}" data-title="Name" class="editable">
+        {{ $collection->description }}
+    </p>
+
     <!-- photo Gallery -->
     <div id="photo-gallery" class="row">
         @foreach($collection->miniatures as $miniature)
             @foreach($miniature->photos as $photo)
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                     <a href="{{ route('photos.show', $photo->id) }}">
-                        <img src="{{ url('/uploads/' . $photo->thumb_url) }}" alt="{{ $photo->caption }}" class="img-responsive"/>
+                        <img src="{{ url('/uploads/' . $photo->thumb_url) }}" alt="{{ $photo->title }}" class="img-responsive"/>
                     </a>
                 </div>
             @endforeach
         @endforeach
     </div>
 
-    <!-- Minitures list -->
+
+        <!-- Minitures list -->
         <div class="table-responsive">
     <table class="table">
         <caption>Miniatures</caption>
@@ -184,9 +176,6 @@
 @endsection
 
 @section('endBody')
-    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/js/lightgallery.min.js"></script>--}}
-    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/js/lg-thumbnail.min.js"></script>--}}
-    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.17/js/lg-zoom.min.js"></script>--}}
     <!-- A jQuery plugin that adds cross-browser mouse wheel support. (Optional) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
 

@@ -24,11 +24,20 @@ Route::group(['middleware' => 'web'], function () {
             '/miniatures/{slug}/photos',
             ['uses' => 'MiniatureController@uploadPhotos', 'as' => 'miniatures.photos']
         );
-        Route::resource('/photos', 'PhotoController', ['only' => 'destroy']);
+        Route::resource('/photos', 'PhotoController', ['only' => ['destroy', 'update']]);
         Route::resource('/users', 'UserController', ['only' => 'update']);
     });
     
     Route::resource('/collections', 'CollectionController', ['only' => ['index', 'show']]);
     Route::resource('/miniatures', 'MiniatureController', ['only' => ['show']]);
     Route::resource('/photos', 'PhotoController', ['only' => 'show']);
+    Route::get('/sitemap', ['as' => 'sitemap.index', 'uses' => 'SitemapController@index']);
+
+    Route::get('/privacy-policy', ['as' => 'privacy-policy', 'uses' => function() {
+        return view('pages.privacy_policy');
+    }]);
+
+    Route::get('/terms-of-service', ['as' => 'terms-of-service', 'uses' => function() {
+        return view('pages.terms_of_service');
+    }]);
 });

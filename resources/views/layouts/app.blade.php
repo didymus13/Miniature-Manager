@@ -29,14 +29,27 @@
     @include('main_menu')
 
     <div class="container">
-        @yield('content')
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-9">
+                @yield('content')
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-3 ads">
+                @include('ads')
+            </div>
+        </div>
+
     </div>
 
+    <div class="footer text-center">
+        <a href="{{ route('privacy-policy') }}">Privacy Policy</a>
+        |
+        <a href="{{ route('terms-of-service') }}">Terms of Service</a>
+    </div>
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
-
+    @include('analytics')
     @yield('endBody')
 </body>
 </html>

@@ -11,10 +11,10 @@
     </div>
     <div class="row">
         {{-- Photo Gallery --}}
-        <div class="col-xs-12 col-sm-8 col-md-9">
+        <div class="col-xs-12 col-sm-7 col-md-9">
             <div class="row">
                 @foreach($homepage->newPhotos as $photo)
-                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
+                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
                         <a href="{{ route('photos.show', $photo->id) }}">
                             <img src="{{ url('/uploads/' . $photo->thumb_url) }}" alt="{{ $photo->caption }}"
                                  class="img-responsive"/>
@@ -25,8 +25,8 @@
         </div>
 
         {{-- Tags List --}}
-        <div class="col-xs-12 col-sm-4 col-md-3">
-            <h3>Most Popular Tags:</h3>
+        <div class="col-xs-12 col-sm-5 col-md-3">
+            <h3>Popular Tags:</h3>
             <ul class="nav nav-pills nav-stacked">
                 @foreach($homepage->topTags as $tag)
                     <li>
@@ -43,7 +43,7 @@
     <div class="row">
         {{-- most viewed --}}
         @if($homepage->mostViewedCollection)
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-xs-12 col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Most Viewed Collection
@@ -63,7 +63,7 @@
 
         @if($homepage->lastUpdatedCollection)
         {{-- Last Updated --}}
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-xs-12 col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Last Updated Collection
@@ -80,8 +80,5 @@
             </div>
         </div>
         @endif
-        <div class="col-xs-12 col-sm-4">
-            @include('ads')
-        </div>
     </div>
 @endsection
