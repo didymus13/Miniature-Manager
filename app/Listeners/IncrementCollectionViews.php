@@ -26,7 +26,9 @@ class IncrementCollectionViews
     public function handle(CollectionViewed $event)
     {
         if (!Auth::check() || (Auth::check() && $event->collection->user->id != Auth::user()->id)) {
+            $event->collection->timestamps = false;
             $event->collection->increment('views');
+            $event->collection->timestamps = true;
         }
     }
 }

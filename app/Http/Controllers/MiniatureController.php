@@ -66,7 +66,7 @@ class MiniatureController extends Controller
 
         $targetPath = $user->slug
             . DIRECTORY_SEPARATOR . $mini->collection->slug
-            . DIRECTORY_SEPARATOR . $photo->slug;
+            . DIRECTORY_SEPARATOR . $photo->slug . '-' . uniqid();
         $ext = $file->getClientOriginalExtension();
 
         $fullImagePath = $targetPath . ".$ext";

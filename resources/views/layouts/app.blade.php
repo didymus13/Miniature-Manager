@@ -30,14 +30,12 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-8 col-md-9">
-                @yield('content')
-            </div>
-            <div class="col-xs-12 col-sm-4 col-md-3 ads">
+            <div class="ads">
                 @include('ads')
             </div>
         </div>
 
+        @yield('content')
     </div>
 
     <div class="footer text-center">
