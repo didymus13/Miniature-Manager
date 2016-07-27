@@ -19,7 +19,7 @@ class UserTest extends \Codeception\TestCase\Test
     // tests
     public function testJsonDataField()
     {
-        $user = factory(\App\User::class);
+        $user = factory(\App\User::class)->make();
         $this->assertNotEmpty($user->json_data);
     }
 }
