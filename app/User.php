@@ -3,12 +3,21 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable;
 
-class User extends Authenticatable implements SluggableInterface
+/**
+ * Class User
+ * @package App
+ * json_data schema:
+ *  - avatar: url
+ *  - cover: url
+ *  - tagline : string
+ *  - bio: text
+ *  - social: [facebook: url, twitter: url, website: url, etc..]
+ */
+class User extends Authenticatable implements EloquentSluggable\SluggableInterface
 {
-    use SluggableTrait;
+    use EloquentSluggable\SluggableTrait;
 
     protected $sluggable = [
         'build_from' => 'name',
@@ -21,7 +30,11 @@ class User extends Authenticatable implements SluggableInterface
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'json_data'
+    ];
+
+    protected $casts = [
+        'json_data' => 'object'
     ];
 
     /**
