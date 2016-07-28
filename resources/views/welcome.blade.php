@@ -23,20 +23,6 @@
                 @endforeach
             </div>
         </div>
-
-        {{-- Tags List --}}
-        <div class="col-xs-12 col-sm-5 col-md-3">
-            <h3>Popular Tags:</h3>
-            <ul class="nav nav-pills nav-stacked">
-                @foreach($homepage->topTags as $tag)
-                    <li>
-                        <a href="{{ route('collections.index', ['tags' => $tag->tag_slug]) }}">
-                            {{ $tag->tag_name }} <span class="badge pull-right">{{ $tag->counts }}</span>
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
     </div>
 
     {{-- Panels --}}
