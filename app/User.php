@@ -2,8 +2,8 @@
 
 namespace App;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Cviebrock\EloquentSluggable;
 
 /**
  * Class User
@@ -15,15 +15,10 @@ use Cviebrock\EloquentSluggable;
  *  - bio: text
  *  - social: [facebook: url, twitter: url, website: url, etc..]
  */
-class User extends Authenticatable implements EloquentSluggable\SluggableInterface
+class User extends Authenticatable
 {
-    use EloquentSluggable\SluggableTrait;
+    use Sluggable;
 
-    protected $sluggable = [
-        'build_from' => 'name',
-        'save_to' => 'slug'
-    ];
-    
     /**
      * The attributes that are mass assignable.
      *
@@ -32,11 +27,9 @@ class User extends Authenticatable implements EloquentSluggable\SluggableInterfa
     protected $fillable = [
         'name', 'email', 'password', 'json_data'
     ];
-
     protected $casts = [
         'json_data' => 'object'
     ];
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -45,6 +38,20 @@ class User extends Authenticatable implements EloquentSluggable\SluggableInterfa
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     public function collections()
     {

@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class AddThumbnailUrl extends Migration
@@ -13,7 +12,7 @@ class AddThumbnailUrl extends Migration
     public function up()
     {
         Schema::table('photos', function($table) {
-            $table->string('thumb_url')->after('url');
+            $table->string('thumb_url')->nullable()->after('url');
         });
     }
 

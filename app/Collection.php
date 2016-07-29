@@ -3,18 +3,12 @@
 namespace App;
 
 use Conner\Tagging\Taggable;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
-class Collection extends Model implements SluggableInterface
+class Collection extends Model
 {
-    use SluggableTrait, Taggable;
-
-    protected $sluggable = [
-        'build_from' => 'label',
-        'save_to' => 'slug'
-    ];
+    use Sluggable, Taggable;
 
     protected $fillable = ['label', 'description'];
 
@@ -38,6 +32,11 @@ class Collection extends Model implements SluggableInterface
         return null;
     }
 
+    public function miniatures()
+    {
+        return $this->hasMany(Miniature::class);
+    }
+
     public function getSizeAttribute()
     {
         return $this->miniatures()->count();
@@ -57,14 +56,23 @@ class Collection extends Model implements SluggableInterface
         return $photos;
     }
 
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'label'
+            ]
+        ];
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function miniatures()
-    {
-        return $this->hasMany(Miniature::class);
     }
 
     public function images()

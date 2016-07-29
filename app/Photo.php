@@ -2,21 +2,15 @@
 
 namespace App;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
-class Photo extends Model implements SluggableInterface
+class Photo extends Model
 {
-    use SluggableTrait;
+    use Sluggable;
 
     protected $fillable = ['url', 'caption', 'title'];
-
-    protected $sluggable = [
-        'build_from' => 'title',
-        'save_to' => 'slug'
-    ];
 
     public static function boot()
     {
@@ -30,6 +24,20 @@ class Photo extends Model implements SluggableInterface
         Photo::saved(function ($photo) {
             $photo->imageable->touch();
         });
+    }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 
     public function imageable()

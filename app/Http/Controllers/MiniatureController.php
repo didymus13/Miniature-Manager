@@ -6,6 +6,7 @@ use App\Collection;
 use App\Http\Requests;
 use App\Miniature;
 use App\Photo;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -61,18 +62,19 @@ class MiniatureController extends Controller
 
         $photo = new Photo([
             'title' => $file->getClientOriginalName(),
+            'slug' => SlugService::createSlug(Photo::class, 'slug', $file->getClientOriginalName())
         ]);
-        $mini->photos()->save($photo);
 
         $targetPath = $user->slug
             . DIRECTORY_SEPARATOR . $mini->collection->slug
             . DIRECTORY_SEPARATOR . $photo->slug . '-' . uniqid();
         $ext = $file->getClientOriginalExtension();
+        $mini->photos()->save($photo);
 
         $fullImagePath = $targetPath . ".$ext";
         $thumbnailImagePath = $targetPath . "-thumb.$ext";
 
-        $disk = Storage::disk('public');
+        $disk = Storage::disk('S3-public');
 
         // Make Image
         $image = Image::make($file->getRealPath());

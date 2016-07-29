@@ -1,14 +1,15 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\User;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use App\User;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    use SluggableScopeHelpers;
+
     public function update(Request $request, $slug)
     {
         $user = User::findBySlugOrFail($slug);

@@ -2,18 +2,13 @@
 
 namespace App;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 
-class Miniature extends Model implements SluggableInterface
+class Miniature extends Model
 {
-    use SluggableTrait;
-
-    protected $sluggable = [
-        'build_from' => 'label',
-        'save_to' => 'slug'
-    ];
+    use Sluggable, SluggableScopeHelpers;
 
     protected $fillable = ['label', 'progress'];
 
@@ -30,6 +25,20 @@ class Miniature extends Model implements SluggableInterface
         Miniature::saved(function ($miniature) {
             $miniature->collection->touch();
         });
+    }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'label'
+            ]
+        ];
     }
 
     public function collection()

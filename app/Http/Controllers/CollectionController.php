@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Collection;
 use App\Events\CollectionViewed;
 use App\Http\Requests;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 
 class CollectionController extends Controller
 {
+    use SluggableScopeHelpers;
+    
     /**
      * Get list of collections.
      * @param Request $request &tags to filter by tag slug
