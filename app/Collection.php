@@ -4,11 +4,12 @@ namespace App;
 
 use Conner\Tagging\Taggable;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 
 class Collection extends Model
 {
-    use Sluggable, Taggable;
+    use Sluggable, Taggable, SluggableScopeHelpers;
 
     protected $fillable = ['label', 'description'];
 

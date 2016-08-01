@@ -4,7 +4,7 @@
     <title>{{ $photo->title or 'Photo for ' . $photo->imageable->label }}</title>
     <meta name="og:title" content="{{ $photo->title or 'Photo for ' . $photo->imageable->label }}"/>
     <meta name="og:description" content="{{ $photo->caption }}" />
-    <meta name="og:image" content="{{ url( $photo->fullUrl) }}"/>
+    <meta name="og:image" content="{{ url( $photo->full_url) }}"/>
     <link rel="canonical" href="{{ route('photos.show', $photo->id) }}" />
 
     @can('edit', $photo)
@@ -23,12 +23,12 @@
     </div>
 
     <div id="photo">
-        <img src="{{ url('/uploads/' . $photo->url) }}" alt="related photo" class="img-responsive"/>
+        <img src="{{ $photo->full_url }}" alt="related photo" class="img-responsive"/>
     </div>
 
     @include('share_buttons', [
         'exclude' => false,
-        'shareSubject' => url($photo->fullUrl, true),
+        'shareSubject' => $photo->full_url,
         'shareText' => $photo->caption,
         'shareUrl' => route('photos.show', $photo->id)
     ])
@@ -44,7 +44,7 @@
             @foreach($photo->siblings as $related)
                 <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2">
                     <a href="{{ route('photos.show', $related->id) }}">
-                        <img src="{{ url($related->fullThumbnailUrl) }}" alt="related photo" class="img-responsive"/>
+                        <img src="{{ url($related->full_thumb_url) }}" alt="related photo" class="img-responsive"/>
                     </a>
                 </div>
             @endforeach

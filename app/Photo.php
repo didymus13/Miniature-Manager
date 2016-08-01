@@ -17,8 +17,8 @@ class Photo extends Model
         parent::boot();
 
         Photo::deleting( function($photo) {
-            Storage::disk('public')->delete($photo->url);
-            Storage::disk('public')->delete($photo->thumb_url);
+            Storage::disk('s3-public')->delete($photo->url);
+            Storage::disk('s3-public')->delete($photo->thumb_url);
         });
 
         Photo::saved(function ($photo) {
@@ -54,11 +54,11 @@ class Photo extends Model
 
     public function getFullUrlAttribute()
     {
-        return url('/uploads/' . $this->url);
+        return Storage::disk('s3-public')->url($this->url);
     }
 
-    public function getFullThumbnailUrlAttribute()
+    public function getFullThumbUrlAttribute()
     {
-        return url('/uploads/' . $this->thumb_url);
+        return Storage::disk('s3-public')->url($this->thumb_url);
     }
 }

@@ -9,7 +9,7 @@ use App\Photo;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Storage;
+use Storage;
 use Intervention\Image\Facades\Image;
 
 class MiniatureController extends Controller
@@ -57,24 +57,25 @@ class MiniatureController extends Controller
         }
 
         $file = $request->file('file');
-
         $user = $mini->collection->user;
 
         $photo = new Photo([
-            'title' => $file->getClientOriginalName(),
-            'slug' => SlugService::createSlug(Photo::class, 'slug', $file->getClientOriginalName())
+            'title' => $file->getClientOriginalName()
         ]);
-
+        $photo->slug = SlugService::createSlug(Photo::class, 'slug', $file->getClientOriginalName());
         $targetPath = $user->slug
             . DIRECTORY_SEPARATOR . $mini->collection->slug
             . DIRECTORY_SEPARATOR . $photo->slug . '-' . uniqid();
         $ext = $file->getClientOriginalExtension();
-        $mini->photos()->save($photo);
-
         $fullImagePath = $targetPath . ".$ext";
         $thumbnailImagePath = $targetPath . "-thumb.$ext";
+        $photo->url = $fullImagePath;
+        $photo->thumb_url = $thumbnailImagePath;
 
-        $disk = Storage::disk('S3-public');
+        $mini->photos()->save($photo);
+
+
+        $disk = Storage::disk('s3-public');
 
         // Make Image
         $image = Image::make($file->getRealPath());
@@ -86,14 +87,14 @@ class MiniatureController extends Controller
             ->resize(1080, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
-            });;
-        $disk->put($fullImagePath, $image->stream());
+            });
+        $disk->put($fullImagePath, $image->stream()->__toString(), 'public');
 
         // Make Thumbnail
         $image->fit(360, 360, function ($constraint) {
             $constraint->upsize();
         });
-        $disk->put($thumbnailImagePath, $image->stream());
+        $disk->put($thumbnailImagePath, $image->stream()->__toString(), 'public');
 
         $photo->url = $fullImagePath;
         $photo->thumb_url = $thumbnailImagePath;

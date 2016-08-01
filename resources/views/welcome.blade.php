@@ -16,7 +16,7 @@
                 @foreach($homepage->newPhotos as $photo)
                     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
                         <a href="{{ route('photos.show', $photo->id) }}">
-                            <img src="{{ url('/uploads/' . $photo->thumb_url) }}" alt="{{ $photo->caption }}"
+                            <img src="{{ $photo->full_thumb_url }}" alt="{{ $photo->caption }}"
                                  class="img-responsive"/>
                         </a>
                     </div>
@@ -37,7 +37,7 @@
                 <div class="panel-body">
                     <a href="{{ route('collections.show', $homepage->mostViewedCollection->slug) }}">
                         @if($homepage->mostViewedCollection->featuredImage)
-                            <img src="{{ url('/uploads/' . $homepage->mostViewedCollection->featuredImage->thumb_url) }}"
+                            <img src="{{ $homepage->mostViewedCollection->featuredImage->full_thumb_url }}"
                                  class="img-responsive" alt="{{ $homepage->mostViewedCollection->label }}">
                         @endif
                         {{ $homepage->mostViewedCollection->label }}
@@ -57,7 +57,7 @@
                 <div class="panel-body">
                     <a href="{{ route('collections.show', $homepage->lastUpdatedCollection->slug) }}">
                         @if($homepage->lastUpdatedCollection->featuredImage)
-                            <img src="{{ url('/uploads/' . $homepage->lastUpdatedCollection->featuredImage->thumb_url) }}"
+                            <img src="{{ $homepage->lastUpdatedCollection->featuredImage->full_thumb_url }}"
                                  class="img-responsive" alt="{{ $homepage->lastUpdatedCollection->label }}">
                         @endif
                         {{ $homepage->lastUpdatedCollection->label }}

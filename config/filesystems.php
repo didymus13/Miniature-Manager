@@ -69,7 +69,5 @@ return [
             'region' => env('S3_REGION', 'your-region'),
             'bucket' => env('S3_BUCKET_PUBLIC', 'your-bucket')
         ],
-
     ],
-
 ];
