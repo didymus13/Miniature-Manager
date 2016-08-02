@@ -17,7 +17,7 @@
                         <div class="col-xs-6 col-sm-2">
                             @if ($collection->featuredImage)
                                 <a href="{{ route('collections.show', $collection->slug) }}">
-                                    <img src="{{$collection->featuredImage->fullThumbnailUrl}}" class="img-responsive"
+                                    <img src="{{$collection->featuredImage->full_thumb_url}}" class="img-responsive"
                                          alt="{{ $collection->featuredImage->caption }}" />
                                 </a>
                             @endif
