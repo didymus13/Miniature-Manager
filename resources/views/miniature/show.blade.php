@@ -8,7 +8,7 @@
     <meta property="og:url" content="{{ route('miniatures.show', $miniature->slug, true) }}" />
 
     @if($miniature->featuredImage)
-        <meta property="og:image" content="{{ url('/uploads/' . $miniature->featuredImage->url) }}" />
+        <meta property="og:image" content="{{ $miniature->featuredImage->full_url }}" />
     @endif
 
     <link rel="canonical" href="{{ route('miniatures.show', $miniature->slug, true) }}"/>
@@ -47,7 +47,7 @@
                     @foreach($miniature->photos as $photo)
                         <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                             <a href="{{ route('photos.show', $photo->id) }}">
-                                <img src="{{ url('/uploads/' . $photo->thumb_url) }}" alt="{{ $photo->caption }}" class="img-responsive"/>
+                                <img src="{{ $photo->full_thumb_url }}" alt="{{ $photo->caption }}" class="img-responsive"/>
                             </a>
                         </div>
                     @endforeach
